@@ -3,10 +3,15 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<form>
-  Voornaam: <input type="text" name="firstname" />
-  Achternaam: <input type="text" name="lastname" />
+<form method="post">
+  <div>Voornaam: <input type="text" name="firstname" /></div>
+  <div>Achternaam: <input type="text" name="lastname" /></div>
+  <div>E-mail: <input type="text" name="email" /></div>
+  <div>Telefoon: <input type="text" name="phone" /></div>
+  <div>Adres: <input type="text" name="address" /></div>
+  <div>Beschrijving: <input type="text" name="address" /></div>
   <input type="submit" value="verstuur" />
 </form>
+
 
 <p>Hallo @ViewData["firstName"] die achternaam @ViewData["lastName"] heeft</p>

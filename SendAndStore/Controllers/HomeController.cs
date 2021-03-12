@@ -23,6 +23,12 @@ namespace SendAndStore.Controllers
       return View();
     }
 
+    public IActionResult Contact()
+    {
+      return View();
+    }
+
+    [HttpPost]
     public IActionResult Contact(string firstName, string lastName)
     {
       ViewData["firstName"] = firstName;
@@ -30,6 +36,7 @@ namespace SendAndStore.Controllers
 
       return View();
     }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
