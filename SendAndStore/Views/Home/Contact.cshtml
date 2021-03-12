@@ -1,0 +1,12 @@
+﻿@{
+  ViewData["Title"] = "Contact";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form>
+  Voornaam: <input type="text" name="firstname" />
+  Achternaam: <input type="text" name="lastname" />
+  <input type="submit" value="verstuur" />
+</form>
+
+<p>Hallo @ViewData["firstName"] die achternaam @ViewData["lastName"] heeft</p>
