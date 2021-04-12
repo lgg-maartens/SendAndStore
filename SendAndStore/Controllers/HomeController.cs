@@ -31,6 +31,11 @@ namespace SendAndStore.Controllers
     [HttpPost]
     public IActionResult Contact(Person person)
     {
+      // hebben we alles goed ingevuld? Dan sturen we de gebruiker door naar de succes pagina
+      if (ModelState.IsValid)
+        return Redirect("/succes");
+
+      // niet goed? Dan sturen we de gegevens door naar de view zodat we de fouten kunnen tonen
       return View(person);
     }
 
