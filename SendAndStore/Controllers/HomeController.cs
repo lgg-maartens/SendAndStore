@@ -29,12 +29,9 @@ namespace SendAndStore.Controllers
     }
 
     [HttpPost]
-    public IActionResult Contact(string firstName, string lastName)
+    public IActionResult Contact(Person person)
     {
-      ViewData["firstName"] = firstName;
-      ViewData["lastName"] = lastName;
-
-      return View();
+      return View(person);
     }
 
 
