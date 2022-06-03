@@ -55,13 +55,15 @@ namespace SendAndStore.Database
       using (MySqlConnection conn = new MySqlConnection(connectionString))
       {
         conn.Open();
-        MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, bericht) VALUES(?voornaam, ?achternaam, ?email, ?bericht)", conn);
+        MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, bericht, wachtwoord) " +
+          "VALUES(?voornaam, ?achternaam, ?email, ?bericht, ?wachtwoord)", conn);
 
         // Elke parameter moet je handmatig toevoegen aan de query
         cmd.Parameters.Add("?voornaam", MySqlDbType.Text).Value = person.FirstName;
         cmd.Parameters.Add("?achternaam", MySqlDbType.Text).Value = person.LastName;
         cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
         cmd.Parameters.Add("?bericht", MySqlDbType.Text).Value = person.Description;
+        cmd.Parameters.Add("?wachtwoord", MySqlDbType.Text).Value = person.Password;
         cmd.ExecuteNonQuery();
       }
     }
