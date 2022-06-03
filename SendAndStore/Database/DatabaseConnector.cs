@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using SendAndStore.Models;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SendAndStore.Database
 {
@@ -58,13 +60,34 @@ namespace SendAndStore.Database
         MySqlCommand cmd = new MySqlCommand("INSERT INTO klant(voornaam, achternaam, email, bericht, wachtwoord) " +
           "VALUES(?voornaam, ?achternaam, ?email, ?bericht, ?wachtwoord)", conn);
 
+        string hashedPassword = ComputeSha256Hash(person.Password);
+
         // Elke parameter moet je handmatig toevoegen aan de query
         cmd.Parameters.Add("?voornaam", MySqlDbType.Text).Value = person.FirstName;
         cmd.Parameters.Add("?achternaam", MySqlDbType.Text).Value = person.LastName;
         cmd.Parameters.Add("?email", MySqlDbType.Text).Value = person.Email;
         cmd.Parameters.Add("?bericht", MySqlDbType.Text).Value = person.Description;
-        cmd.Parameters.Add("?wachtwoord", MySqlDbType.Text).Value = person.Password;
+        cmd.Parameters.Add("?wachtwoord", MySqlDbType.Text).Value = hashedPassword;
         cmd.ExecuteNonQuery();
+      }
+    }
+
+
+    static string ComputeSha256Hash(string rawData)
+    {
+      // Create a SHA256   
+      using (SHA256 sha256Hash = SHA256.Create())
+      {
+        // ComputeHash - returns byte array  
+        byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+        // Convert byte array to a string   
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < bytes.Length; i++)
+        {
+          builder.Append(bytes[i].ToString("x2"));
+        }
+        return builder.ToString();
       }
     }
   }
